@@ -14,11 +14,11 @@ async function getFromURL(url: string) {
 
   if (
     cached &&
-    now.getTime() - cached.creation.getTime() < 1000 * 60 * 60 * 8
+    now.getTime() - cached.creation.getTime() < 1000 * 60 * 60 * 2
   ) {
     info = cached.info as unknown as ytdl.videoInfo
   } else {
-    const i = await ytdl.getBasicInfo(url)
+    const i = await ytdl.getInfo(url)
 
     await prisma.videoInfo.deleteMany({ where: { url } })
 
