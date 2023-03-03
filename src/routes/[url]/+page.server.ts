@@ -20,7 +20,13 @@ async function getFromURL(url: string) {
   } else {
     const i = await ytdl.getInfo(url)
 
-    await prisma.videoInfo.deleteMany({ where: { url } })
+    await prisma.videoInfo.deleteMany({
+      where: {
+        creation: {
+          lt: new Date(now.getTime() - 1000 * 60 * 60 * 2),
+        },
+      },
+    })
 
     await prisma.videoInfo.create({
       data: { creation: now, info: i as any, url },
