@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client"
-import { getBasicInfo, type videoInfo } from "ytdl-core"
+import ytdl from "ytdl-core"
 import { sort } from "../sort-formats"
 import type { PageServerLoad } from "./$types"
 
@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 prisma.$connect()
 
 async function getFromURL(url: string) {
-  let info: videoInfo
+  let info: ytdl.videoInfo
 
   const cached = await prisma.videoInfo.findFirst({ where: { url } })
   const now = new Date()
@@ -16,9 +16,9 @@ async function getFromURL(url: string) {
     cached &&
     now.getTime() - cached.creation.getTime() < 1000 * 60 * 60 * 8
   ) {
-    info = cached.info as unknown as videoInfo
+    info = cached.info as unknown as ytdl.videoInfo
   } else {
-    const i = await getBasicInfo(url)
+    const i = await ytdl.getBasicInfo(url)
 
     await prisma.videoInfo.deleteMany({ where: { url } })
 
