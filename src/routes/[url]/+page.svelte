@@ -75,6 +75,17 @@
       controls
       playsinline
       src={data.formats.dual?.url}
+      on:keydown={(event) => {
+        if (
+          !event.ctrlKey &&
+          !event.altKey &&
+          !event.metaKey &&
+          video &&
+          event.key == " "
+        ) {
+          event.stopImmediatePropagation()
+        }
+      }}
     />
 
     <div class="ml-6 mr-[1.625rem] flex flex-col gap-6 pb-4 md:flex-row">
@@ -111,7 +122,7 @@
 
           <div>
             <a
-              class="flex h-9 items-center rounded-full bg-[rgb(255,255,255,0.1)]  px-4 font-base text-sm font-medium"
+              class="flex h-9 items-center rounded-full bg-[rgb(255,255,255,0.1)] px-4 font-base text-sm font-medium focus-visible:bg-[rgb(255,255,255,0.2)] focus-visible:outline-none active:bg-[rgb(255,255,255,0.2)]"
               href={data.url}>Open in YouTube</a
             >
           </div>
