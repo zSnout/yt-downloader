@@ -33,5 +33,5 @@ export function toRelativeTime(other: Date) {
     return format(Math.floor(dist / 30), "months")
   }
 
-  return format(Math.floor(dist / 365), "months")
+  return format(Math.floor(dist / 365), "years")
 }
