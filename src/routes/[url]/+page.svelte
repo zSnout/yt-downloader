@@ -140,6 +140,12 @@
 
             <p>
               {toRelativeTime(new Date(data.uploadDate))}
+
+              ({new Date(data.uploadDate).toLocaleDateString(undefined, {
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })})
             </p>
           </div>
 
