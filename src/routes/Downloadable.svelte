@@ -8,7 +8,7 @@
 </script>
 
 {#if format}
-  <a class="flex" download="playback" href={format.url}>
+  <a class="flex" download href={format.url}>
     <div
       class="mr-2 flex aspect-video h-[5.875rem] w-[10.5rem] items-center justify-center rounded-lg bg-[rgb(255,255,255,0.1)]"
     >
