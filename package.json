@@ -33,7 +33,7 @@
   "type": "module",
   "dependencies": {
     "@prisma/client": "^4.11.0",
-    "ytdl-core": "^4.11.2",
+    "ytdl-core": "^4.10.0",
     "zod": "^3.20.6"
   }
 }
