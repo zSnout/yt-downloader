@@ -19,8 +19,6 @@ const config = {
   },
 
   plugins: [
-    require("@tailwindcss/line-clamp"),
-
     /** @type {import("tailwindcss/types/config").PluginCreator} */
     ({ addUtilities, matchUtilities, theme }) => {
       matchUtilities(

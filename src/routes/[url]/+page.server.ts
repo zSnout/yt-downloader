@@ -1,39 +1,9 @@
-import { PrismaClient } from "@prisma/client"
 import ytdl from "ytdl-core"
 import { sort } from "../sort-formats"
 import type { PageServerLoad } from "./$types"
 
-const prisma = new PrismaClient()
-prisma.$connect()
-
 async function getFromURL(url: string) {
-  let info: ytdl.videoInfo
-
-  const cached = await prisma.videoInfo.findFirst({ where: { url } })
-  const now = new Date()
-
-  if (
-    cached &&
-    now.getTime() - cached.creation.getTime() < 1000 * 60 * 60 * 2
-  ) {
-    info = cached.info as unknown as ytdl.videoInfo
-  } else {
-    const i = await ytdl.getInfo(url)
-
-    await prisma.videoInfo.deleteMany({
-      where: {
-        creation: {
-          lt: new Date(now.getTime() - 1000 * 60 * 60 * 2),
-        },
-      },
-    })
-
-    await prisma.videoInfo.create({
-      data: { creation: now, info: i as any, url },
-    })
-
-    info = i
-  }
+  const info = await ytdl.getInfo(url)
 
   return {
     allFormats: info.formats,

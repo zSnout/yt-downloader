@@ -18,7 +18,7 @@
     </div>
 
     <div>
-      <p class="mb-1 font-base text-sm font-medium line-clamp-2">
+      <p class="mb-1 line-clamp-2 font-base text-sm font-medium">
         {format.hasVideo ? format.qualityLabel : "No video"}
       </p>
 
